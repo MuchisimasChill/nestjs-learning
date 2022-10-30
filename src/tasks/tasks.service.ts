@@ -3,10 +3,18 @@ import { Task, TaskStatus } from './task.model';
 import { v4 as uuid } from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Task as TaskEntity } from './task.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TasksService {
   private tasks: Task[] = [];
+
+  constructor(
+    @InjectRepository(TaskEntity)
+    private taskRepository: Repository<TaskEntity>,
+  ) {}
 
   getTaskById(id: string): Task {
     const found = this.tasks.find((task) => task.id === id);
