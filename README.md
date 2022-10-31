@@ -6,3 +6,5 @@ class-transformer
 
 db:
 @nestjs/typeorm pg
+
+bcrypt
